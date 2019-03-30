@@ -21,6 +21,7 @@ class Main extends Component {
     fetch('/page', { method: 'POST' })
       .then(resp => resp.json())
       .then(data => this.setState({ page: data['page'] }));
+    this.setState({ page: 'Fetching ...' });
   }
 
   handleRead() {
