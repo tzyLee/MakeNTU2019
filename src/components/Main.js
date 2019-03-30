@@ -10,7 +10,14 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.handleFlipPage = this.handleFlipPage.bind(this);
-    this.state = { page: 'Press Flip Page to view next page' };
+    this.handleRead = this.handleRead.bind(this);
+    this.state = {
+      page: 'Press Flip Page to view next page',
+      lastIdx: 0,
+      lineIdx: 0,
+      highlighted: []
+    };
+    this.sep = new RegExp(/[,.]\s/);
   }
 
   handleSaveText() {
@@ -20,12 +27,52 @@ class Main extends Component {
   handleFlipPage() {
     fetch('/page', { method: 'POST' })
       .then(resp => resp.json())
-      .then(data => this.setState({ page: data['page'] }));
-    this.setState({ page: 'Fetching ...' });
+      .then(data =>
+        this.setState({
+          page: data['page']
+        })
+      );
+    this.setState({
+      page: 'Fetching ...',
+      lastIdx: 0,
+      lineIdx: 0,
+      highlighted: []
+    });
   }
 
   handleRead() {
-    fetch('/read', { method: 'GET' });
+    fetch('/read', {
+      body: JSON.stringify({
+        lastIdx: this.state.lastIdx,
+        lineIdx: this.state.lineIdx
+      }),
+      method: 'POST'
+    })
+      .then(
+        resp => (
+          console.log(resp.status),
+          resp.status === 200 ? Promise.reject('End of read') : resp.json()
+        )
+      )
+      .then(data => {
+        let endIndex = data['lastIdx'];
+        // Highlight lastIdx ~ endIndex - 1
+        let highlight = [
+          this.state.page.substring(0, this.state.lastIdx),
+          <span className="hightlight">
+            {this.state.page.substring(this.state.lastIdx, endIndex)}
+          </span>,
+          this.state.page.substring(endIndex)
+        ];
+        this.setState({ highlighted: highlight });
+        this.setState(data);
+        this.handleRead(); // Recursive call
+      })
+      .catch(err => {
+        if (err !== 'End of read') throw err;
+        // Rethrow unexpected error
+        else this.setState({ lastIdx: 0, lineIdx: 0, highlighted: [] }); // Reset state
+      });
   }
 
   handleUpButton(){
@@ -41,7 +88,11 @@ class Main extends Component {
       <div id="top">
         <div id="pageContainer">
           <div id="textBox" className="animated fadeIn delay-2s">
-            <p>{this.state.page}</p>
+            <p>
+              {this.state.highlighted.length
+                ? this.state.highlighted
+                : this.state.page}
+            </p>
           </div>
         </div>
         <div id="buttonContainer">
