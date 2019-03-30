@@ -6,6 +6,7 @@ from src.text_to_speech import speak, speekLock
 # from src.camera import Camera
 from src.image_to_txt import Image_to_Text
 from src.webcam import captureImg
+import src.controlAngle as controlAngle
 from re import compile, split
 from threading import Thread
 
@@ -80,12 +81,14 @@ def read_page():
 @app.route("/up", methods=['POST'])
 def moveUp():
     # Move board up (angle -> bigger)
+    controlAngle.moveUp()
     return
 
 
 @app.route("/down", methods=['POST'])
 def moveDown():
     # Move board down (angle -> smaller)
+    controlAngle.moveDown()
     return
 
 
