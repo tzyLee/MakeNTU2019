@@ -54,12 +54,12 @@ def read_page():
         currIdx = 0
         line = ''
         while currIdx < len(lines):
-            while len(line + lines[currIdx]) < 199:
+            while currIdx < len(lines) and len(line + lines[currIdx]) < 199:
                 line += lines[currIdx]
+                currIdx += 1
             print(line)
             speak(line)
             line = ''
-            currIdx += 1
     return '', 204
 
 
