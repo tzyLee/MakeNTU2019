@@ -62,3 +62,14 @@
     background-color: white;
     box-shadow: 0px 0px 10px rgb(100, 102, 105);
 }
+
+#logo
+{
+    float: right;
+    margin-right: 5em;
+}
+
+#icon
+{
+    font-size: 1em;
+}

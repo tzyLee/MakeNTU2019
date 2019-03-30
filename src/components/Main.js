@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import './Main.css';
 
 class Main extends Component{
@@ -10,7 +11,6 @@ class Main extends Component{
             <div id="top">
                 <div id="pageContainer">
                     <div id="textBox" className="animated fadeIn delay-2s">
-
                     </div>
                 </div>
                 <div id="buttonContainer">
@@ -26,6 +26,12 @@ class Main extends Component{
                                 <ArrowDropDown />
                             </Button>
                         </div> 
+                    </div>
+                    <div id="logo">
+                        Lazy <LibraryBooks 
+                                id="icon"
+                                className="animated infinite bounce delay-1s"
+                            /> rEEd
                     </div>
                 </div>
             </div>
