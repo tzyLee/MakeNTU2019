@@ -23,6 +23,11 @@ counter = 0
 def index():
     return send_file('public/index.html')
 
+@app.route("/save", methods=['GET'])
+def save_page():
+    global last_paragraph
+    with open('./assets/captured_text/{}.txt'.format(counter), 'r') as file:
+        file.write(last_paragraph)
 
 @app.route("/page", methods=['POST'])
 def get_page():

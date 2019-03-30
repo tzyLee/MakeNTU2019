@@ -14,6 +14,10 @@ class Main extends Component {
     this.state = { page: 'Fetching' };
   }
 
+  handleSaveText(){
+    fetch('/save', {method: 'GET'});
+  }
+
   handleFlipPage() {
     fetch('/page', { method: 'POST' })
       .then(resp => resp.json())
@@ -38,7 +42,7 @@ class Main extends Component {
         </div>
         <div id="buttonContainer">
           <div id="innerButtonContainer" className="animated fadeIn delay-2s">
-            <Button className="button">Save Text</Button>
+            <Button className="button" onClick={this.handleSaveText}>Save Text</Button>
             <Button className="button" onClick={this.handleFlipPage}>
               Flip Page
             </Button>
