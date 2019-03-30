@@ -43,5 +43,7 @@ def speak(string):
 
 
 if __name__ == '__main__':
-    speak(sys.argv[1])
+    # speak('Finally, we extend our treatment of sinusoidal steady-state analysis to lossy lines and also consider two special cases of pulses on lossy lines.Although the concepts and techniques discussed in this chapter are based on the analysis of transmission-line systems, many of these are also applicable to the analysis of other, analogous systems')
+    speak('Finally, we extend our treatment of sinusoidal steady-state analysis to lossy lines and also consider two special cases of pulses on lossy lines. Although the concepts and techniques discussed in a a')
+    # speak(sys.argv[1])
 #    chinese_to_google('幹')

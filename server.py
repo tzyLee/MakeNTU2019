@@ -2,9 +2,10 @@ from flask import Flask, send_file, request, jsonify
 from json import loads
 from time import sleep
 from src.text_to_speech import speak
-from src.motor import rotateMotor
-from src.camera import Camera
+# from src.motor import rotateMotor
+# from src.camera import Camera
 from src.image_to_txt import Image_to_Text
+from re import compile, split
 
 app = Flask(__name__,
             template_folder='public', static_folder='public', static_url_path='')
@@ -30,25 +31,26 @@ def save_page():
     global last_paragraph
     with open('./assets/captured_text/{}.txt'.format(counter), 'w') as file:
         file.write(last_paragraph)
-    return ('', 204)
+    return '', 204
 
 
 @app.route("/page", methods=['POST'])
 def get_page():
     global counter, last_paragraph, camera, drive
     counter += 1
-    rotateMotor(0, 2, 120, 600)
+    # rotateMotor(0, 2, 120, 600)
     sleep(1.5)
-    camera.capture()
-    last_paragraph = drive.image2text('./assets/temp.jpg')
-    # last_paragraph = drive.image2text('./assets/electromagnetics.png')
+    # camera.capture()
+    # last_paragraph = drive.image2text('./assets/temp.jpg')
+    last_paragraph = drive.image2text('./assets/electromagnetics.png')
     return jsonify({'page': last_paragraph})
 
 
 @app.route("/read", methods=['GET', 'POST'])
 def read_page():
     if last_paragraph:
-        lines = last_paragraph.split('. ')
+        global sep
+        lines = split(sep, last_paragraph)
         for line in lines:
             print(line)
             speak(line)
@@ -57,6 +59,7 @@ def read_page():
 
 if __name__ == "__main__":
     drive = Image_to_Text()
-    # camera = None
-    camera = Camera()
+    camera = None
+    # camera = Camera()
+    sep = compile(r'[,.]\s')
     app.run()
