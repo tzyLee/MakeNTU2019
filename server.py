@@ -7,6 +7,7 @@ from src.text_to_speech import speak, speekLock
 from src.image_to_txt import Image_to_Text
 from src.webcam import captureImg
 import src.controlAngle as controlAngle
+import src.motor as motor
 from re import compile, split
 from threading import Thread
 
@@ -35,11 +36,8 @@ def save_page():
 def get_page():
     global counter, last_paragraph, camera, drive, sep, lines
     counter += 1
-    # rotateMotor(0, 2, 120, 600)
-    # sleep(1.5)
-    # camera.capture()
-    # last_paragraph = drive.image2text('./assets/temp.jpg')
-    captureImg()
+    motor.flip() # flip page
+    captureImg() # use webcam
     last_paragraph = drive.image2text('./assets/electromagnetics.png').strip()
     lines = split(sep, last_paragraph)
     return jsonify({'page': last_paragraph})

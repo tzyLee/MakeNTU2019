@@ -39,12 +39,16 @@ def reset():
     rotateMotor(7, 1, 0)
     rotateMotor(11, 1, 0)
 
-def flip():
-    reset()
-
+if __name__ == '__main__':
+    # Channel 0 : 180 = book, 90 = idle
+    # Channel 4 : 0 = book, 90 = idle
+    # Chennel 3: 180 = idle, flip to 0
+    # Channel 7: idle = 0, flip to 180
+    
+    #rotateMotor(11, 1, 180)
+    
     rotateMotor(4, 1, 0)
     rotateMotor(7, 1, 180)
     rotateMotor(11, 1, 180)
-
-if __name__ == '__main__':
-    flip()
+    
+    #rotateMotor(7, 1, 0)
