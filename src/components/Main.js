@@ -10,7 +10,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.handleFlipPage = this.handleFlipPage.bind(this);
-    this.state = { page: 'Fetching' };
+    this.state = { page: 'Press Flip Page to view next page' };
   }
 
   handleSaveText() {
@@ -26,10 +26,6 @@ class Main extends Component {
 
   handleRead() {
     fetch('/read', { method: 'GET' });
-  }
-
-  componentDidMount() {
-    this.handleFlipPage();
   }
 
   render() {

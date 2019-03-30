@@ -11,7 +11,7 @@ def capture(duration=5):
 
 
 class Camera:
-    def __init__(self, save_dir='../assets/'):
+    def __init__(self, save_dir='assets/'):
         self.camera = PiCamera()
         self.save_dir = save_dir
 
@@ -19,4 +19,4 @@ class Camera:
         self.camera.close()
 
     def capture(self, file_name='temp.jpg'):
-        self.camera.capture(save_dir+file_name)
+        self.camera.capture(self.save_dir+file_name)
