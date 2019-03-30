@@ -5,6 +5,7 @@ from src.text_to_speech import speak, speekLock
 # from src.motor import rotateMotor
 # from src.camera import Camera
 from src.image_to_txt import Image_to_Text
+from src.webcam import captureImg
 from re import compile, split
 from threading import Thread
 
@@ -37,7 +38,7 @@ def get_page():
     # sleep(1.5)
     # camera.capture()
     # last_paragraph = drive.image2text('./assets/temp.jpg')
-
+    captureImg()
     last_paragraph = drive.image2text('./assets/electromagnetics.png')
     lines = split(sep, last_paragraph)
     return jsonify({'page': last_paragraph})
