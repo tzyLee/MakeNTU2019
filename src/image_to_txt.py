@@ -11,6 +11,7 @@ import os
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
+
 def image2text(imgfile):
     """Shows basic usage of the Drive v3 API.
     Prints the names and ids of the first 10 files the user has access to.
@@ -58,10 +59,11 @@ def image2text(imgfile):
     service.files().delete(fileId=res['id']).execute()
     textResult = ''
     with open('tmp.txt', 'r') as file:
-        for line in file:
-            textResult += (line + '\n')
+        textResult = '\n'.join(file.readlines())
     os.remove('tmp.txt')
     return textResult
 
-#result = image2text("../assets/electromagnetics.png")
-#print(result)
+
+if __name__ == "__main__":
+    result = image2text("../assets/electromagnetics.png")
+    print(result)
