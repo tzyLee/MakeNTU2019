@@ -1,6 +1,9 @@
 from flask import Flask, send_file, request, jsonify
-#from src.text_to_speech import speak
 from json import loads
+from time import sleep
+from src.text_to_speech import speak
+from src.motor import rotateMotor
+from src.camera import Camera
 
 app = Flask(__name__,
             template_folder='public', static_folder='public', static_url_path='')
@@ -23,11 +26,14 @@ def index():
 
 @app.route("/page", methods=['POST'])
 def get_page():
-    global counter, last_paragraph
+    global counter, last_paragraph, camera
     counter += 1
     counter %= 5
     # data = loads(request.data)
     # speak(str(data['test']))
+    rotateMotor(0, 2, 120, 600)
+    sleep(1.5)
+    camera.capture()
     last_paragraph = test_paragraphs[counter]
     return jsonify({'page': test_paragraphs[counter]})
 
@@ -37,10 +43,10 @@ def read_page():
     if last_paragraph:
         lines = last_paragraph.split('. ')
         for line in lines:
-            print(line)
             speak(line)
     return '', 204
 
 
 if __name__ == "__main__":
+    camera = Camera()
     app.run()
