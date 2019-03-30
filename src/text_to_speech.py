@@ -35,8 +35,6 @@ def speak(string):
         string), len=get_len(string), token=get_token(string))
     # url = 'https://translate.google.com.tw/translate_tts?ie=UTF-8&q=%E8%B6%95%E7%BE%9A%E7%BE%8A&tl=zh-CN&total=1&idx=0&textlen=3&tk=353679.254520&client=t&prev=input&ttsspeed=0.24'
     print('The url is:', url)
-    print('Text length:', get_len(string))
-    print('Text:', string)
     p.set_mrl(url)
     p.play()
     sleep(1.5)

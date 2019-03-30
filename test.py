@@ -1,9 +1,10 @@
 from src.text_to_speech import speak
-from src.image_to_txt import image2text
+from src.image_to_txt import Image_to_Text
 
 
 def main():
-    res = image2text('./assets/electromagnetics.png')
+    drive = Image_to_Text()
+    res = drive.image2text('./assets/electromagnetics.png')
     a = res[20:120]
     print(a)
     speak(a)

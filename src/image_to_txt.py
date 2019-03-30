@@ -10,60 +10,64 @@ import os
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/drive']
+TOKEN_PATH = os.path.join(os.path.dirname(__file__), 'token.pickle')
 
 
-def image2text(imgfile):
-    """Shows basic usage of the Drive v3 API.
-    Prints the names and ids of the first 10 files the user has access to.
-    """
-    creds = None
-    # The file token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
-            creds = flow.run_local_server()
-        # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+class Image_to_Text:
+    def __init__(self):
+        self.service = None
+        self.connect_google_drive()
 
-    service = build('drive', 'v3', credentials=creds)
-    txtfile = 'tmp.txt'  # Text file outputted by OCR
+    def connect_google_drive(self):
+        creds = None
+        # The file token.pickle stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists(TOKEN_PATH):
+            print("Loading token")
+            with open(TOKEN_PATH, 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    'credentials.json', SCOPES)
+                creds = flow.run_local_server()
+            # Save the credentials for the next run
+            with open(TOKEN_PATH, 'wb') as token:
+                pickle.dump(creds, token)
 
-    mime = 'application/vnd.google-apps.document'
-    res = service.files().create(
-        body={
-            'name': imgfile,
-            'mimeType': mime
-        },
-        media_body=MediaFileUpload(imgfile, mimetype=mime, resumable=True)
-    ).execute()
+        self.service = build('drive', 'v3', credentials=creds)
 
-    downloader = MediaIoBaseDownload(
-        io.FileIO(txtfile, 'wb'),
-        service.files().export_media(fileId=res['id'], mimeType="text/plain")
-    )
+    def image2text(self, imgfile):
+        result = io.BytesIO()
 
-    done = False
-    while done is False:
-        status, done = downloader.next_chunk()
+        mime = 'application/vnd.google-apps.document'
+        res = self.service.files().create(
+            body={
+                'name': imgfile,
+                'mimeType': mime
+            },
+            media_body=MediaFileUpload(imgfile, mimetype=mime, resumable=True)
+        ).execute()
 
-    service.files().delete(fileId=res['id']).execute()
-    textResult = ''
-    with open('tmp.txt', 'r') as file:
-        textResult = '\n'.join(file.readlines())
-    os.remove('tmp.txt')
-    return textResult
+        downloader = MediaIoBaseDownload(
+            result,
+            self.service.files().export_media(
+                fileId=res['id'], mimeType="text/plain")
+        )
+
+        done = False
+        while not done:
+            status, done = downloader.next_chunk()
+
+        self.service.files().delete(fileId=res['id']).execute()
+        return result.getvalue().decode('utf-8')
 
 
 if __name__ == "__main__":
-    result = image2text("../assets/electromagnetics.png")
+    drive = Image_to_Text()
+    result = drive.image2text("../assets/electromagnetics.png")
     print(result)
