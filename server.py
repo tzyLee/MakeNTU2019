@@ -36,8 +36,8 @@ def save_page():
 def get_page():
     global counter, last_paragraph, camera, drive, sep, lines
     counter += 1
-    motor.flip() # flip page
-    captureImg() # use webcam
+    motor.flip()  # flip page
+    captureImg()  # use webcam
     last_paragraph = drive.image2text('./assets/electromagnetics.png').strip()
     lines = split(sep, last_paragraph)
     return jsonify({'page': last_paragraph})
@@ -80,14 +80,14 @@ def read_page():
 def moveUp():
     # Move board up (angle -> bigger)
     controlAngle.moveUp()
-    return
+    return '', 200
 
 
 @app.route("/down", methods=['POST'])
 def moveDown():
     # Move board down (angle -> smaller)
     controlAngle.moveDown()
-    return
+    return '', 200
 
 
 if __name__ == "__main__":
