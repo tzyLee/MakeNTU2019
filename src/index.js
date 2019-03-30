@@ -1,4 +1,4 @@
-import ReactDom from "react-dom";
-import React from "react";
-
-ReactDom.render(<p>Hello World!</p>, document.getElementById("root"));
+import ReactDom from 'react-dom';
+import React from 'react';
+import Reader from './components/reader.jsx';
+ReactDom.render(<Reader />, document.getElementById('root'));
