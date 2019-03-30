@@ -39,9 +39,11 @@ def speak(string):
     print('Text:', string)
     p.set_mrl(url)
     p.play()
-    sleep(100)
+    sleep(1.5)
+    duration = p.get_length() // 1000
+    sleep(duration + 1)
 
 
-if(__name__ == '__main__'):
+if __name__ == '__main__':
     speak(sys.argv[1])
 #    chinese_to_google('幹')
