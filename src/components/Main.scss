@@ -12,6 +12,11 @@ body {
   width: 100%;
   height: 85%;
   background-color: rgba(215, 220, 223, 0.2);
+	background: linear-gradient(-45deg,#23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 5s ease infinite;
+	-moz-animation: Gradient 5s ease infinite;
+	animation: Gradient 5s ease infinite;
 }
 
 .button {
@@ -32,7 +37,7 @@ body {
 
   & .button {
     font-family: 'Bree Serif';
-    font-size: 1.4em;
+    font-size: 1.2em;
   }
 }
 
@@ -72,6 +77,43 @@ body {
     line-height: 2.3rem;
     font-size: 1.3rem;
   }
+}
+
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
 #logo {

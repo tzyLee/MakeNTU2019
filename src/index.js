@@ -2,6 +2,7 @@ import ReactDom from 'react-dom';
 import React from 'react';
 import Entry from './components/Entry';
 import Main from './components/Main';
+import './index.scss';
 
 class App extends React.Component {
   constructor(props) {
