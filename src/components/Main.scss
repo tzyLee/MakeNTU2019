@@ -12,11 +12,11 @@ body {
   width: 100%;
   height: 85%;
   background-color: rgba(215, 220, 223, 0.2);
-	background: linear-gradient(-45deg,#23A6D5, #23D5AB);
-	background-size: 400% 400%;
-	-webkit-animation: Gradient 5s ease infinite;
-	-moz-animation: Gradient 5s ease infinite;
-	animation: Gradient 5s ease infinite;
+  background: linear-gradient(-45deg, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 20s ease infinite;
+  -moz-animation: Gradient 20s ease infinite;
+  animation: Gradient 20s ease infinite;
 }
 
 .button {
@@ -69,7 +69,8 @@ body {
   top: 10%;
   margin: 0 auto;
   background-color: rgb(247, 248, 249);
-  box-shadow: 0px 0px 50px rgb(100, 102, 105), inset 0px 0px 0px 5px rgb(207, 208, 209);
+  box-shadow: 0px 0px 50px rgb(100, 102, 105),
+    inset 0px 0px 0px 5px rgb(207, 208, 209);
   overflow-y: auto;
   border-radius: 10px;
 
@@ -80,41 +81,40 @@ body {
   }
 }
 
-
 @-webkit-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @-moz-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 #logo {
