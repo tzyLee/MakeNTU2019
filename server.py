@@ -54,6 +54,15 @@ def read_page():
             line = ''
     return '', 204
 
+@app.route("/up", methods=['POST'])
+def moveUp()
+    # Move board up (angle -> bigger)
+    return
+
+@app.route("/down", methods=['POST'])
+def moveDown()
+    # Move board down (angle -> smaller)
+    return
 
 if __name__ == "__main__":
     drive = Image_to_Text()

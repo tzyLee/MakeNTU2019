@@ -28,6 +28,14 @@ class Main extends Component {
     fetch('/read', { method: 'GET' });
   }
 
+  handleUpButton(){
+    fetch('/up', { method: 'POST'});
+  }
+
+  handleDownButton(){
+    fetch('/down', { method: 'POST'})
+  }
+
   render() {
     return (
       <div id="top">
@@ -48,10 +56,10 @@ class Main extends Component {
               Read Page
             </Button>
             <div id="upDownButtonContainer">
-              <Button className="button">
+              <Button className="button" onClick={this.handleUpButton}>
                 <ArrowDropUp />
               </Button>
-              <Button className="button">
+              <Button className="button" onClick={this.handleDownButton}>
                 <ArrowDropDown />
               </Button>
             </div>
