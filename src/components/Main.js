@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
-import './Main.css';
+import './Main.scss';
 // import Reader from './Reader.jsx';
 
 class Main extends Component {

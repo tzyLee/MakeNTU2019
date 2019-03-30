@@ -24,11 +24,11 @@ body {
   height: 15%;
   box-shadow: 0px -1px 20px rgb(100, 102, 105);
   /*background-color: orange;*/
-}
 
-#buttonContainer .button {
-  font-family: 'Bree Serif';
-  font-size: 1.4em;
+  & .button {
+    font-family: 'Bree Serif';
+    font-size: 1.4em;
+  }
 }
 
 #innerButtonContainer {
@@ -41,12 +41,11 @@ body {
 
 #upDownButtonContainer {
   float: right;
-}
-
-#upDownButtonContainer .button {
-  float: right;
-  width: 70px;
-  text-align: center;
+  & .button {
+    float: right;
+    width: 70px;
+    text-align: center;
+  }
 }
 
 #upDownButtonContainer svg {
@@ -62,12 +61,12 @@ body {
   background-color: white;
   box-shadow: 0px 0px 10px rgb(100, 102, 105);
   overflow-y: auto;
-}
 
-#textBox > p {
-  padding: 5% 10%;
-  line-height: 2.3rem;
-  font-size: 1.3rem;
+  & > p {
+    padding: 5% 10%;
+    line-height: 2.3rem;
+    font-size: 1.3rem;
+  }
 }
 
 #logo {
@@ -118,4 +117,23 @@ body {
   animation-name: bounce;
   -webkit-transform-origin: center bottom;
   transform-origin: center bottom;
+}
+
+@media screen and (max-width: 870px) {
+  #textBox {
+    width: 80%;
+  }
+
+  #innerButtonContainer {
+    position: static;
+    display: flex;
+    align-items: center;
+  }
+
+  #buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
