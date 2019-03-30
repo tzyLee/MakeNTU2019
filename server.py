@@ -12,6 +12,8 @@ test_paragraphs = [
     'In auctor lacinia pellentesque. Vivamus pharetra sapien ut elit pulvinar, vel finibus nulla vestibulum. Fusce sapien leo, imperdiet ut mauris ut, consequat condimentum arcu. Fusce ullamcorper condimentum est. Nullam turpis enim, scelerisque at pellentesque vitae, congue at enim. Praesent nec sem eleifend, ornare tortor eu, aliquam lacus. Nullam blandit consequat est sed tempor. Sed volutpat eu purus ut gravida. Phasellus egestas efficitur finibus. Etiam posuere elementum sapien, congue dapibus ex. Integer eu auctor felis. Nullam ac facilisis mauris. Vivamus efficitur ex ut fringilla placerat. Phasellus sed congue eros, sed dapibus turpis. Nullam ligula enim, feugiat tempus augue sollicitudin, vestibulum cursus magna. Sed in dolor condimentum, volutpat purus at, suscipit nulla.',
     'Aliquam nulla lorem, finibus ut facilisis vitae, mattis in ante. Etiam rutrum velit sed mi pulvinar placerat. Aliquam aliquet luctus elit, sed pulvinar libero hendrerit quis. Mauris bibendum tempus congue. Mauris porttitor purus ut condimentum varius. Duis ut erat condimentum, luctus nibh eget, lobortis nulla. Curabitur lorem ante, mattis nec facilisis eu, euismod sit amet velit. Nunc scelerisque aliquam tincidunt. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sodales, libero quis viverra porta, eros velit scelerisque diam, vehicula sollicitudin leo arcu eu odio. Vivamus posuere luctus neque. Morbi ac nisl nec diam sodales condimentum a sed nisi. In id tincidunt dolor.'
 ]
+last_paragraph = None
+counter = 0
 
 
 @app.route("/")
@@ -19,17 +21,25 @@ def index():
     return send_file('public/index.html')
 
 
-counter = 0
-
-
 @app.route("/page", methods=['POST'])
 def get_page():
-    global counter
+    global counter, last_paragraph
     counter += 1
     counter %= 5
     # data = loads(request.data)
     # speak(str(data['test']))
+    last_paragraph = test_paragraphs[counter]
     return jsonify({'page': test_paragraphs[counter]})
+
+
+@app.route("/read", methods=['GET', 'POST'])
+def read_page():
+    if last_paragraph:
+        lines = last_paragraph.split('. ')
+        for line in lines:
+            print(line)
+            speak(line)
+    return '', 204
 
 
 if __name__ == "__main__":
