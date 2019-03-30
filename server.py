@@ -48,7 +48,8 @@ def read_page():
     global speekLock
     if not speekLock.acquire():
         return '', 403
-    data = loads(request.data)
+    data = loads(request.data.decode('utf-8')
+                 if type(request.data) is bytes else request.data)
     lastIdx, currIdx = data['lastIdx'], data['lineIdx']
     acc_len = 0
     # `lastIndex` sent from here last time
@@ -92,4 +93,4 @@ if __name__ == "__main__":
     camera = None
     # camera = Camera()
     sep = compile(r'[,.]\s')
-    app.run()
+    app.run(host='0.0.0.0', port=80)
