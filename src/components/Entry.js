@@ -21,8 +21,8 @@ class Entry extends Component {
             id="button"
             className="animated bounceIn delay-3s"
             onClick={this.props.nextStage}
-          >
-            - Start -
+          > 
+            <div className="animated infinite flash delay-4s">- Start -</div>
           </Button>
         </div>
       </div>
