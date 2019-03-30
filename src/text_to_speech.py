@@ -3,6 +3,9 @@ import vlc
 import sys
 from time import sleep
 from urllib.parse import quote
+from threading import Lock
+
+speekLock = Lock()
 
 
 def get_len(string):
@@ -40,6 +43,7 @@ def speak(string):
     sleep(1.5)
     duration = p.get_length() // 1000
     sleep(duration + 1)
+    speekLock.release()
 
 
 if __name__ == '__main__':
