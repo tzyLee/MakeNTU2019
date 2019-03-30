@@ -63,7 +63,7 @@ def read_page():
                 acc_len += len(lines[currIdx])
                 currIdx += 1
             acc_len += 2*len(line)  # add length of separator
-            line = ''.join(line)
+            line = ' '.join(line)
             print(line)
             t = Thread(target=speak, args=(line,))  # start a thread to speak
             t.start()
@@ -74,15 +74,18 @@ def read_page():
     # To be continued
     return jsonify({'lineIdx': currIdx, 'lastIdx': lastIdx + acc_len}), 206
 
+
 @app.route("/up", methods=['POST'])
-def moveUp()
+def moveUp():
     # Move board up (angle -> bigger)
     return
 
+
 @app.route("/down", methods=['POST'])
-def moveDown()
+def moveDown():
     # Move board down (angle -> smaller)
     return
+
 
 if __name__ == "__main__":
     drive = Image_to_Text()
