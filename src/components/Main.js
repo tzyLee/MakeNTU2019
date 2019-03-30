@@ -9,13 +9,12 @@ import './Main.scss';
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.handleRead = this.handleRead.bind(this);
     this.handleFlipPage = this.handleFlipPage.bind(this);
     this.state = { page: 'Fetching' };
   }
 
-  handleSaveText(){
-    fetch('/save', {method: 'GET'});
+  handleSaveText() {
+    fetch('/save', { method: 'GET' });
   }
 
   handleFlipPage() {
@@ -42,7 +41,9 @@ class Main extends Component {
         </div>
         <div id="buttonContainer">
           <div id="innerButtonContainer" className="animated fadeIn delay-2s">
-            <Button className="button" onClick={this.handleSaveText}>Save Text</Button>
+            <Button className="button" onClick={this.handleSaveText}>
+              Save Text
+            </Button>
             <Button className="button" onClick={this.handleFlipPage}>
               Flip Page
             </Button>
