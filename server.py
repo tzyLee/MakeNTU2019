@@ -51,9 +51,15 @@ def read_page():
     if last_paragraph:
         global sep
         lines = split(sep, last_paragraph)
-        for line in lines:
+        currIdx = 0
+        line = ''
+        while currIdx < len(lines):
+            while len(line + lines[currIdx]) < 199:
+                line += lines[currIdx]
             print(line)
             speak(line)
+            line = ''
+            currIdx += 1
     return '', 204
 
 
