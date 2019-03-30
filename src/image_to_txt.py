@@ -65,5 +65,5 @@ def image2text(imgfile):
 
 
 if __name__ == "__main__":
-    result = image2text("../assets/electromagnetics.png")
+    result = image2text("../assets/capture.png")
     print(result)
