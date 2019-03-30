@@ -22,7 +22,7 @@ class Entry extends Component {
             className="animated bounceIn delay-3s"
             onClick={this.props.nextStage}
           >
-            Start
+            - Start -
           </Button>
         </div>
       </div>

@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   nextStage() {
-    this.setState({ stage: this.state.stage + 1 });
+    setTimeout(() => this.setState({ stage: this.state.stage + 1 }), 500);
   }
 
   render() {
