@@ -10,6 +10,7 @@ import io
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
+
 def main():
     """Shows basic usage of the Drive v3 API.
     Prints the names and ids of the first 10 files the user has access to.
@@ -49,9 +50,8 @@ def main():
             print(u'{0} ({1})'.format(item['name'], item['id']))
     '''
 
-
-
-    imgfile = '../assets/electromagnetics.png'  # Image with texts (png, jpg, bmp, gif, pdf)
+    # Image with texts (png, jpg, bmp, gif, pdf)
+    imgfile = '../assets/electromagnetics.png'
     txtfile = 'output.txt'  # Text file outputted by OCR
 
     mime = 'application/vnd.google-apps.document'
@@ -74,6 +74,7 @@ def main():
 
     service.files().delete(fileId=res['id']).execute()
     print("Done.")
+
 
 if __name__ == '__main__':
     main()
