@@ -86,7 +86,7 @@ class Main extends Component {
   render() {
     return (
       <div id="top">
-        <div id="pageContainer">
+        <div className={this.state.page == 'Fetching ...' ? "pageContainer__waiting":"pageContainer"}>
           <div id="textBox" className="animated fadeIn delay-2s">
             <p>
               {this.state.highlighted.length
