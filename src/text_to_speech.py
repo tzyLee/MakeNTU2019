@@ -6,6 +6,8 @@ from urllib.parse import quote
 from threading import Lock
 
 speekLock = Lock()
+vlc_instance = vlc.Instance()
+player = vlc_instance.media_player_new()
 
 
 def get_len(string):
@@ -32,17 +34,16 @@ def language(string):
 
 
 def speak(string):
-    i = vlc.Instance()
-    p = i.media_player_new()
+    global player
     url = 'http://translate.google.com.tw/translate_tts?ie=UTF-8&q={string}&tl={lang}&total=1&idx=0&textlen={len}&tk={token}&client=webapp&prev=input'.format(string=quote(string), lang=language(
         string), len=get_len(string), token=get_token(string))
     # url = 'https://translate.google.com.tw/translate_tts?ie=UTF-8&q=%E8%B6%95%E7%BE%9A%E7%BE%8A&tl=zh-CN&total=1&idx=0&textlen=3&tk=353679.254520&client=t&prev=input&ttsspeed=0.24'
-    print('The url is:', url)
-    p.set_mrl(url)
-    p.play()
+    # print('The url is:', url)
+    player.set_mrl(url)
+    player.play()
     sleep(1.5)
-    duration = p.get_length() // 1000
-    sleep(duration + 1)
+    duration = player.get_length() // 1000
+    sleep(duration + 0.5)
     speekLock.release()
 
 

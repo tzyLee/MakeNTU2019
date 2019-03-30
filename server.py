@@ -38,7 +38,7 @@ def get_page():
     # camera.capture()
     # last_paragraph = drive.image2text('./assets/temp.jpg')
 
-    last_paragraph = drive.image2text('./assets/electromagnetics.png')
+    last_paragraph = drive.image2text('./assets/electromagnetics.png').strip()
     lines = split(sep, last_paragraph)
     return jsonify({'page': last_paragraph})
 
@@ -64,7 +64,7 @@ def read_page():
                 currIdx += 1
             acc_len += 2*len(line)  # add length of separator
             line = ' '.join(line)
-            print(line)
+            # print(line)
             t = Thread(target=speak, args=(line,))  # start a thread to speak
             t.start()
     else:
