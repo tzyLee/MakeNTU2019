@@ -75,20 +75,26 @@ class Main extends Component {
       });
   }
 
-  handleUpButton(){
-    fetch('/up', { method: 'POST'});
+  handleUpButton() {
+    fetch('/up', { method: 'POST' });
   }
 
-  handleDownButton(){
-    fetch('/down', { method: 'POST'})
+  handleDownButton() {
+    fetch('/down', { method: 'POST' });
   }
 
   render() {
     return (
       <div id="top">
-        <div id="pageContainer">
+        <div
+          className={
+            this.state.page === 'Fetching ...'
+              ? 'pageContainer__waiting'
+              : 'pageContainer'
+          }
+        >
           <div id="textBox" className="animated fadeIn delay-2s">
-            <p>
+            <p style={{ whiteSpace: 'pre-line' }}>
               {this.state.highlighted.length
                 ? this.state.highlighted
                 : this.state.page}
