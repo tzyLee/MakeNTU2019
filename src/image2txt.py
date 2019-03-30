@@ -5,9 +5,11 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
+import io
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/drive']
+
 
 def main():
     """Shows basic usage of the Drive v3 API.
@@ -48,9 +50,8 @@ def main():
             print(u'{0} ({1})'.format(item['name'], item['id']))
     '''
 
-
-
-    imgfile = '../assets/electromagnetics.png'  # Image with texts (png, jpg, bmp, gif, pdf)
+    # Image with texts (png, jpg, bmp, gif, pdf)
+    imgfile = '../assets/electromagnetics.png'
     txtfile = 'output.txt'  # Text file outputted by OCR
 
     mime = 'application/vnd.google-apps.document'
@@ -66,13 +67,14 @@ def main():
         io.FileIO(txtfile, 'wb'),
         service.files().export_media(fileId=res['id'], mimeType="text/plain")
     )
-    
+
     done = False
     while done is False:
         status, done = downloader.next_chunk()
 
     service.files().delete(fileId=res['id']).execute()
     print("Done.")
+
 
 if __name__ == '__main__':
     main()
