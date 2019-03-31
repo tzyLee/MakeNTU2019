@@ -2,7 +2,7 @@ from flask import Flask, send_file, request, jsonify
 from json import loads
 from time import sleep
 from src.text_to_speech import speak, speekLock
-# from src.motor import rotateMotor
+from src.motor import rotateMotor
 # from src.camera import Camera
 from src.image_to_txt import Image_to_Text
 from src.webcam import captureImg
@@ -34,10 +34,10 @@ def save_page():
 
 @app.route("/page", methods=['POST'])
 def get_page():
-    global counter, last_paragraph, camera, drive, sep, lines
+    global counter, last_paragraph, drive, sep, lines
     counter += 1
-    motor.flip() # flip page
-    captureImg() # use webcam
+    motor.flip()  # flip page
+    captureImg()  # use webcam
     last_paragraph = drive.image2text('./assets/electromagnetics.png').strip()
     lines = split(sep, last_paragraph)
     return jsonify({'page': last_paragraph})
@@ -80,19 +80,18 @@ def read_page():
 def moveUp():
     # Move board up (angle -> bigger)
     controlAngle.moveUp()
-    return
+    return '', 200
 
 
 @app.route("/down", methods=['POST'])
 def moveDown():
     # Move board down (angle -> smaller)
     controlAngle.moveDown()
-    return
+    return '', 200
 
 
 if __name__ == "__main__":
     drive = Image_to_Text()
-    camera = None
     # camera = Camera()
     sep = compile(r'[,.]\s')
     app.run(host='0.0.0.0', port=80)
